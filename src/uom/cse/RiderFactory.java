@@ -29,14 +29,13 @@ public class RiderFactory implements Runnable {
 
             try {
 
-                Rider rider = new Rider(id);
-                (new Thread(rider)).start();
-
-
                 System.out.println("Next rider arrives in " + (produceInterval/1000) + " seconds");
 
 
                 Thread.sleep(produceInterval);
+
+                Rider rider = new Rider(id);
+                (new Thread(rider)).start();
 
 
             } catch (InterruptedException e) {

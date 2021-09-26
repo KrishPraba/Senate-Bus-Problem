@@ -28,12 +28,13 @@ public class BusFactory implements Runnable{
             id++;
 
             try {
-                Bus bus = new Bus(id);
-                (new Thread(bus)).start();
 
                 System.out.println("Next bus arrives in " + (produceInterval/60000) + " minutes");
 
                 Thread.sleep(produceInterval);
+
+                Bus bus = new Bus(id);
+                (new Thread(bus)).start();
 
             } catch (InterruptedException e) {
                 System.out.println(e.getMessage());
