@@ -20,14 +20,13 @@ public class Bus implements Runnable{
             System.out.println("Bus " + this.id +" arrived to the bus stop");
             int boardingRidersCount = Math.min(BusStop.WAITING_RIDERS.get(), BOARDING_LIMIT);
             for (int i = 0; i < boardingRidersCount; i++) {
+
                 //Gives each rider in the boarding area , one by one, , a boarding pass to board the bus.
-//                System.out.println("Bus semaphore released by Bus " + this.getId());
                 BusStop.BUS.release();
 
                 // The rider who has acquired the boarding pass can board the bus.
                 // Wait for the rider boarded to release the boarding pass.
                 BusStop.BOARDED.acquire();
-//                System.out.println("Boarded semaphore acquired by Bus " + this.getId());
             }
             int n = BusStop.WAITING_RIDERS.get();
 
@@ -36,7 +35,6 @@ public class Bus implements Runnable{
 
             //release the boarding area entering pass
             BusStop.MUTEX.release();
-//            System.out.println("Boarding area mutex released by Bus " + this.getId());
             depart();
         } catch (InterruptedException e) {
             System.out.println(e.getMessage());
